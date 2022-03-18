@@ -30,7 +30,7 @@ let MemberController = class MemberController {
             if (!createMemberDto.lastname) {
                 messageArray.push('lastname is require');
             }
-            throw new common_1.NotFoundException({
+            throw new common_1.BadRequestException({
                 message: messageArray
             });
         }
@@ -53,10 +53,9 @@ let MemberController = class MemberController {
             if (!updateMemberDto.lastname) {
                 messageArray.push('lastname is require');
             }
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.BAD_REQUEST,
+            throw new common_1.BadRequestException({
                 message: messageArray
-            }, common_1.HttpStatus.BAD_REQUEST);
+            });
         }
         else {
             return this.memberService.update(+id, updateMemberDto);
