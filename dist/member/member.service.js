@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
 const member_entity_1 = require("./entities/member.entity");
+const common_2 = require("@nestjs/common");
 let MemberService = class MemberService {
     constructor(memberRepository) {
         this.memberRepository = memberRepository;
+        this.logger = new common_2.Logger();
     }
     create(createMemberDto) {
         return this.memberRepository.save(createMemberDto);
@@ -35,6 +37,15 @@ let MemberService = class MemberService {
     }
     remove(id) {
         return this.memberRepository.delete(id);
+    }
+    testLogger() {
+        this.logger.verbose('test verbose log');
+        this.logger.warn('test warn log');
+        this.logger.debug('test debug log');
+        this.logger.error('test error log');
+    }
+    countMember() {
+        return this.memberRepository.findAndCount();
     }
 };
 MemberService = __decorate([
