@@ -5,7 +5,9 @@ import { UpdateMemberDto } from './dto/update-member.dto';
 
 @Controller('member')
 export class MemberController {
-  constructor(private readonly memberService: MemberService) {}
+  constructor(
+    private readonly memberService: MemberService,
+  ) {}
 
   @Post()
   create(@Body() createMemberDto: CreateMemberDto) {
@@ -81,5 +83,10 @@ export class MemberController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.memberService.remove(+id);
+  }
+
+  @Post('/test-log')
+  testLog() {
+    this.memberService.testLogger() ;
   }
 }

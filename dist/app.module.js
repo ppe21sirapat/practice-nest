@@ -13,6 +13,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const postgres_config_1 = require("./postgres.config");
@@ -24,7 +25,17 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forRoot(postgres_config_1.postgresConfig), member_module_1.MemberModule],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                load: [postgres_config_1.default],
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                useFactory: (configService) => (Object.assign({}, configService.get('database'))),
+                inject: [config_1.ConfigService]
+            }),
+            member_module_1.MemberModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     }),

@@ -64,6 +64,9 @@ let MemberController = class MemberController {
     remove(id) {
         return this.memberService.remove(+id);
     }
+    testLog() {
+        this.memberService.testLogger();
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -100,6 +103,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], MemberController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)('/test-log'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], MemberController.prototype, "testLog", null);
 MemberController = __decorate([
     (0, common_1.Controller)('member'),
     __metadata("design:paramtypes", [member_service_1.MemberService])
