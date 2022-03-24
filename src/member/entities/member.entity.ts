@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm' ;
+import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm' ;
 
 @Entity()
 export class Member {
@@ -10,4 +10,10 @@ export class Member {
 
     @Column()
     lastname:string ;
+    
+    @Column({nullable: true})
+    email:string ;
+
+    @Column({nullable: true})
+    tel:string ;
 } 

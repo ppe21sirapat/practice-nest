@@ -2,6 +2,8 @@ import { AppService } from './app.service';
 interface Member {
     firstname?: string;
     lastname?: string;
+    email?: string;
+    tel?: string;
 }
 export declare class AppController {
     private readonly appService;
