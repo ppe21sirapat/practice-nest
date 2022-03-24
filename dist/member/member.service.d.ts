@@ -13,5 +13,4 @@ export declare class MemberService {
     update(id: number, updateMemberDto: UpdateMemberDto): Promise<UpdateResult>;
     remove(id: number): Promise<DeleteResult>;
     testLogger(): void;
-    countMember(): Promise<[Member[], number]>;
 }

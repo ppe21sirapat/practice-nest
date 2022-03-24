@@ -25,6 +25,14 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Member.prototype, "lastname", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Member.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Member.prototype, "tel", void 0);
 Member = __decorate([
     (0, typeorm_1.Entity)()
 ], Member);

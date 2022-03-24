@@ -22,21 +22,7 @@ let MemberController = class MemberController {
         this.memberService = memberService;
     }
     create(createMemberDto) {
-        let messageArray = [];
-        if (!createMemberDto.firstname || !createMemberDto.lastname) {
-            if (!createMemberDto.firstname) {
-                messageArray.push('firstname is require');
-            }
-            if (!createMemberDto.lastname) {
-                messageArray.push('lastname is require');
-            }
-            throw new common_1.BadRequestException({
-                message: messageArray
-            });
-        }
-        else {
-            return this.memberService.create(createMemberDto);
-        }
+        return this.memberService.create(createMemberDto);
     }
     findAll() {
         return this.memberService.findAll();
@@ -45,21 +31,7 @@ let MemberController = class MemberController {
         return this.memberService.findOne(+id);
     }
     update(id, updateMemberDto) {
-        let messageArray = [];
-        if (!updateMemberDto.firstname || !updateMemberDto.lastname) {
-            if (!updateMemberDto.firstname) {
-                messageArray.push('firstname is require');
-            }
-            if (!updateMemberDto.lastname) {
-                messageArray.push('lastname is require');
-            }
-            throw new common_1.BadRequestException({
-                message: messageArray
-            });
-        }
-        else {
-            return this.memberService.update(+id, updateMemberDto);
-        }
+        return this.memberService.update(+id, updateMemberDto);
     }
     remove(id) {
         return this.memberService.remove(+id);

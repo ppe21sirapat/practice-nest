@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var MemberService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MemberService = void 0;
 const common_1 = require("@nestjs/common");
@@ -18,22 +19,75 @@ const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
 const member_entity_1 = require("./entities/member.entity");
 const common_2 = require("@nestjs/common");
-let MemberService = class MemberService {
+let MemberService = MemberService_1 = class MemberService {
     constructor(memberRepository) {
         this.memberRepository = memberRepository;
-        this.logger = new common_2.Logger();
+        this.logger = new common_2.Logger(MemberService_1.name);
     }
-    create(createMemberDto) {
-        return this.memberRepository.save(createMemberDto);
+    async create(createMemberDto) {
+        try {
+            this.logger.verbose({
+                method: 'create',
+                data: createMemberDto
+            });
+            return this.memberRepository.save(createMemberDto);
+        }
+        catch (error) {
+            this.logger.error({
+                method: 'create',
+                error: error
+            });
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.INTERNAL_SERVER_ERROR
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    findAll() {
-        return this.memberRepository.find();
+    async findAll() {
+        try {
+            return this.memberRepository.find();
+        }
+        catch (error) {
+            this.logger.error({
+                method: 'findAll',
+                error: error
+            });
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.INTERNAL_SERVER_ERROR
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    findOne(id) {
-        return this.memberRepository.findOne(id);
+    async findOne(id) {
+        try {
+            return this.memberRepository.findOne(id);
+        }
+        catch (error) {
+            this.logger.error({
+                method: 'findOne',
+                error: error
+            });
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.INTERNAL_SERVER_ERROR
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    update(id, updateMemberDto) {
-        return this.memberRepository.update(id, updateMemberDto);
+    async update(id, updateMemberDto) {
+        try {
+            this.logger.verbose({
+                method: 'update',
+                id: id,
+                data: updateMemberDto
+            });
+            return this.memberRepository.update(id, updateMemberDto);
+        }
+        catch (error) {
+            this.logger.error({
+                method: 'update',
+                error: error
+            });
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.INTERNAL_SERVER_ERROR
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     remove(id) {
         return this.memberRepository.delete(id);
@@ -44,11 +98,8 @@ let MemberService = class MemberService {
         this.logger.debug('test debug log');
         this.logger.error('test error log');
     }
-    countMember() {
-        return this.memberRepository.findAndCount();
-    }
 };
-MemberService = __decorate([
+MemberService = MemberService_1 = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(member_entity_1.Member)),
     __metadata("design:paramtypes", [typeorm_1.Repository])

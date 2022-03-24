@@ -3,7 +3,9 @@ import { AppService } from './app.service';
 
 interface Member {
   firstname? : string,
-  lastname? : string
+  lastname? : string,
+  email? : string,
+  tel? : string
 }
 
 @Controller()
