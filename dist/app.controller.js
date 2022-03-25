@@ -15,20 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
+const message_producer_service_1 = require("./message.producer.service");
 let AppController = class AppController {
-    constructor(appService) {
+    constructor(appService, messageProducerService) {
         this.appService = appService;
-        this.memberArray = [];
-        this.memberData = new Object();
+        this.messageProducerService = messageProducerService;
     }
     getHello() {
         return this.appService.getHello();
     }
-    addMember(firstname, lastname) {
-        this.memberData.firstname = firstname;
-        this.memberData.lastname = lastname;
-        this.memberArray.push(this.memberData);
-        return this.memberArray;
+    messageQueue(message) {
+        this.messageProducerService.sendMessage(message);
+        return message;
     }
 };
 __decorate([
@@ -38,16 +36,16 @@ __decorate([
     __metadata("design:returntype", String)
 ], AppController.prototype, "getHello", null);
 __decorate([
-    (0, common_1.Post)('/add'),
-    __param(0, (0, common_1.Body)('firstname')),
-    __param(1, (0, common_1.Body)('lastname')),
+    (0, common_1.Get)('/message-queue'),
+    __param(0, (0, common_1.Body)('message')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "addMember", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", String)
+], AppController.prototype, "messageQueue", null);
 AppController = __decorate([
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService])
+    __metadata("design:paramtypes", [app_service_1.AppService,
+        message_producer_service_1.MessageProducerService])
 ], AppController);
 exports.AppController = AppController;
 //# sourceMappingURL=app.controller.js.map

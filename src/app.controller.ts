@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { MessageProducerService } from './message.producer.service';
 
 interface Member {
   firstname? : string,
@@ -10,25 +11,19 @@ interface Member {
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  memberArray: Member[] = [] ;
-
-  memberData: Member = new Object() ;
+  constructor(
+    private readonly appService: AppService,
+    private messageProducerService: MessageProducerService
+  ) {}
 
   @Get()
   getHello(): string {
     return this.appService.getHello();
   }
 
-  @Post('/add')
-  addMember(@Body('firstname') firstname:string, @Body('lastname') lastname:string) {
-    this.memberData.firstname = firstname ;
-    this.memberData.lastname = lastname ;
-    
-    // push data to memberArray
-    this.memberArray.push(this.memberData) ;
-
-    return this.memberArray ;
+  @Get('/message-queue')
+  messageQueue(@Body('message') message:string): string {
+    this.messageProducerService.sendMessage(message) ;
+    return message
   }
 }

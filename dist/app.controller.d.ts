@@ -1,16 +1,9 @@
 import { AppService } from './app.service';
-interface Member {
-    firstname?: string;
-    lastname?: string;
-    email?: string;
-    tel?: string;
-}
+import { MessageProducerService } from './message.producer.service';
 export declare class AppController {
     private readonly appService;
-    constructor(appService: AppService);
-    memberArray: Member[];
-    memberData: Member;
+    private messageProducerService;
+    constructor(appService: AppService, messageProducerService: MessageProducerService);
     getHello(): string;
-    addMember(firstname: string, lastname: string): Member[];
+    messageQueue(message: string): string;
 }
-export {};
