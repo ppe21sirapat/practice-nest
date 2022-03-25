@@ -23,7 +23,10 @@ export class AppController {
 
   @Get('/message-queue')
   messageQueue(@Body('message') message:string): string {
-    this.messageProducerService.sendMessage(message) ;
+    // for(let i=0 ; i<=4 ; i++)
+    // {
+      this.messageProducerService.sendMessage(message) ;
+    // }
     return message
   }
 }

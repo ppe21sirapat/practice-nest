@@ -13,11 +13,15 @@ exports.MessageConsumer = void 0;
 const bull_1 = require("@nestjs/bull");
 let MessageConsumer = class MessageConsumer {
     messageJob(job) {
+        console.log(job);
         console.log(job.data);
     }
 };
 __decorate([
-    (0, bull_1.Process)('message-job'),
+    (0, bull_1.Process)({
+        name: 'message-job',
+        concurrency: 5,
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)

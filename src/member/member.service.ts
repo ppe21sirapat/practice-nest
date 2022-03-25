@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
@@ -31,9 +31,7 @@ export class MemberService {
           error: error
         }
       ) ;
-      throw new HttpException({
-        status: HttpStatus.INTERNAL_SERVER_ERROR
-      },HttpStatus.INTERNAL_SERVER_ERROR)
+      throw new InternalServerErrorException()
     }
   }
 

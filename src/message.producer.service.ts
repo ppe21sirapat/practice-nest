@@ -12,6 +12,11 @@ export class MessageProducerService {
    async sendMessage(message:string) {
        await this.queue.add('message-job',{
            message: message
+       },{
+        //    delay: 3000,
+           attempts: 5,
+           removeOnComplete: true
        })
    }
+
 }

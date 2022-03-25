@@ -37,9 +37,7 @@ let MemberService = MemberService_1 = class MemberService {
                 method: 'create',
                 error: error
             });
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.INTERNAL_SERVER_ERROR
-            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new common_1.InternalServerErrorException();
         }
     }
     async findAll() {

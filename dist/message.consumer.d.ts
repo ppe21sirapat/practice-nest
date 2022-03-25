@@ -1,3 +1,4 @@
+import { Job } from 'bull';
 export declare class MessageConsumer {
-    messageJob(job: any): void;
+    messageJob(job: Job<unknown>): void;
 }

@@ -22,6 +22,9 @@ let MessageProducerService = class MessageProducerService {
     async sendMessage(message) {
         await this.queue.add('message-job', {
             message: message
+        }, {
+            attempts: 5,
+            removeOnComplete: true
         });
     }
 };

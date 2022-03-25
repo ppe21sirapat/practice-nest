@@ -28,5 +28,9 @@ __decorate([
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], CreateMemberDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsPhoneNumber)('TH'),
+    __metadata("design:type", String)
+], CreateMemberDto.prototype, "tel", void 0);
 exports.CreateMemberDto = CreateMemberDto;
 //# sourceMappingURL=create-member.dto.js.map
